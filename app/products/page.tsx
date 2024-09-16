@@ -1,15 +1,15 @@
 import React from "react";
 
-const Home = () => {
+const Products = () => {
   return (
     <>
       <div className="eco_section">
         <div className="eco_container">
-          <div className="eco_wrapper">Home</div>
+          <div className="eco_wrapper">Products</div>
         </div>
       </div>
     </>
   );
 };
 
-export default Home;
+export default Products;
