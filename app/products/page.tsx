@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import AddToCart from "@/components/AddToCart";
-import CartList from "@/components/CartList";
-import RemoveFromCart from "@/components/RemoveFromCart";
-import axios from "axios";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { MdShoppingCart } from "react-icons/md";
+import AddToCart from '@/components/AddToCart';
+import CartList from '@/components/CartList';
+import RemoveFromCart from '@/components/RemoveFromCart';
+import axios from 'axios';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { MdShoppingCart } from 'react-icons/md';
 
 type Tproducts = {
   id: number;
@@ -28,12 +28,12 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [imageLoading, setImageLoading] = useState(true);
   const [cartData, setCartData] = useState<TselectedProduct[]>([]);
-  const [cartopen, setCartOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   // data fetching
   useEffect(() => {
     const dataFetch = async () => {
-      const response = await axios.get("https://dummyjson.com/products");
+      const response = await axios.get('https://dummyjson.com/products');
       const data = response.data;
       setProductsData(data.products);
       setLoading(false);
@@ -50,23 +50,23 @@ const Products = () => {
     ]);
   };
 
-  // remove from cart button
+  // removing product from cart button
   const removeFromCartHandler = (productId: number) => {
     setCartData((prev) => prev.filter((item) => item.id !== productId));
   };
 
   // cart count
   useEffect(() => {
-    const cartListElement = document.querySelector(".eco_cart_list");
+    const cartListElement = document.querySelector('.eco_cart_list');
     if (cartListElement) {
       cartListElement.textContent = `${cartData.length}`;
     }
   }, [cartData.length]);
 
-  //
+  // cart list open
   const onCartListHandler = () => {
-    const body = document.querySelector("body");
-    body?.classList.add("cart_opened");
+    const body = document.querySelector('body');
+    body?.classList.add('cart_opened');
     setCartOpen(true);
   };
 
@@ -74,9 +74,9 @@ const Products = () => {
     <>
       <div className="eco_section">
         <div className="eco_container">
-          <div className="eco_wrapper flex justify-center gap-4 relative">
-            <div className="w-full h-full flex flex-col items-center justify-start gap-10">
-              <h1 className="text-4xl">Best Sellers</h1>
+          <div className="eco_wrapper flex flex-row justify-center gap-4 relative">
+            <div className="w-full h-full flex flex-col items-center justify-start gap-10 max-[767px]:gap-6">
+              <h1 className="text-4xl max-[767px]:text-[32px]">Best Sellers</h1>
               <div className="w-full h-full flex flex-wrap justify-center gap-10">
                 {loading ? (
                   <div className="text-center">Loading...</div>
@@ -125,7 +125,7 @@ const Products = () => {
                 )}
               </div>
             </div>
-            <div className="hidden min-[768px]:block">
+            <div className="block">
               <button
                 className="eco_cart_ctn w-10 h-10 flex items-center justify-center sticky right-0 top-[120px] ml-auto cursor-pointer"
                 onClick={onCartListHandler}
@@ -137,7 +137,7 @@ const Products = () => {
           </div>
         </div>
       </div>
-      {cartopen && <CartList setCartOpen={setCartOpen} cartData={cartData} />}
+      {cartOpen && <CartList setCartOpen={setCartOpen} cartData={cartData} />}
     </>
   );
 };

@@ -1,39 +1,42 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import shopifyLogo from "../assets/images/shopify.svg";
-import { usePathname } from "next/navigation";
-import { HiOutlineMenu } from "react-icons/hi";
-import { CgClose } from "react-icons/cg";
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import shopifyLogo from '../assets/images/shopify.svg';
+import { usePathname } from 'next/navigation';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { CgClose } from 'react-icons/cg';
 
 const Navbar = () => {
+  // to find the pathname
   const pathName = usePathname();
 
+  // nav links data
   const pageRoutes = [
     {
-      name: "home",
-      route: "/",
+      name: 'home',
+      route: '/',
     },
     {
-      name: "about",
-      route: "/about",
+      name: 'about',
+      route: '/about',
     },
     {
-      name: "products",
-      route: "/products",
+      name: 'products',
+      route: '/products',
     },
     {
-      name: "contact",
-      route: "/contact",
+      name: 'contact',
+      route: '/contact',
     },
     {
-      name: "login",
-      route: "/login",
+      name: 'login',
+      route: '/login',
     },
   ];
 
+  // navbar scroll effect
   useEffect(() => {
     let initialScrollPosition = 0;
     const scrollTrigger = () => {
@@ -41,31 +44,33 @@ const Navbar = () => {
 
       if (currentScrollPosition - initialScrollPosition > 0) {
         document
-          .querySelector(".eco_nav_section")
-          ?.classList.add("active_scroll");
+          .querySelector('.eco_nav_section')
+          ?.classList.add('active_scroll');
       } else {
         document
-          .querySelector(".eco_nav_section")
-          ?.classList.remove("active_scroll");
+          .querySelector('.eco_nav_section')
+          ?.classList.remove('active_scroll');
       }
       initialScrollPosition = currentScrollPosition;
     };
 
-    window.addEventListener("scroll", scrollTrigger);
+    window.addEventListener('scroll', scrollTrigger);
 
     return () => {
-      window.removeEventListener("scroll", scrollTrigger);
+      window.removeEventListener('scroll', scrollTrigger);
     };
   }, []);
 
+  // mobile menu open button
   const onMenuNavOpenHandler = () => {
-    const ecoMobileNavCtn = document.querySelector(".eco_mobile_nav_ctn");
-    ecoMobileNavCtn?.classList.add("active_mobile_nav");
+    const ecoMobileNavCtn = document.querySelector('.eco_mobile_nav_ctn');
+    ecoMobileNavCtn?.classList.add('active_mobile_nav');
   };
 
+  // mobile menu close button
   const onMenuNavCloseHandler = () => {
-    const ecoMobileNavCtn = document.querySelector(".eco_mobile_nav_ctn");
-    ecoMobileNavCtn?.classList.remove("active_mobile_nav");
+    const ecoMobileNavCtn = document.querySelector('.eco_mobile_nav_ctn');
+    ecoMobileNavCtn?.classList.remove('active_mobile_nav');
   };
 
   return (
@@ -74,7 +79,7 @@ const Navbar = () => {
         <div className="eco_nav_container">
           <div className="eco_nav_wrapper">
             <div className="w-full h-full max-w-[140px]">
-              <Link href={"/"}>
+              <Link href={'/'}>
                 <Image
                   className="w-full h-full object-contain object-center"
                   src={shopifyLogo}
@@ -96,8 +101,8 @@ const Navbar = () => {
                       key={index}
                       className={`${
                         pathName === item.route
-                          ? "underline underline-offset-[6px]"
-                          : ""
+                          ? 'underline underline-offset-[6px]'
+                          : ''
                       } list-none`}
                     >
                       <Link href={item.route}>
@@ -111,7 +116,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="eco_mobile_nav_ctn fixed w-full h-full top-0 p-4 z-[10000] translate-y-[-100%] transition-all duration-300">
+      <div className="eco_mobile_nav_ctn fixed w-full h-[100vh] top-0 p-4 z-[10000] bg-[#212121] translate-y-[-100%] transition-all duration-300">
         <div className="w-full h-full bg-[#212121] p-4 rounded-lg shadow-[0_20px_30px_#ffffff10] flex flex-col items-end justify-start">
           <button onClick={onMenuNavCloseHandler}>
             <CgClose className="w-8 h-8" />
@@ -123,8 +128,8 @@ const Navbar = () => {
                   key={index}
                   className={`${
                     pathName === item.route
-                      ? "underline underline-offset-[6px]"
-                      : ""
+                      ? 'underline underline-offset-[6px]'
+                      : ''
                   } list-none py-4 px-3`}
                 >
                   <Link href={item.route} onClick={onMenuNavCloseHandler}>
